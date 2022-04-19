@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" InitialTargets="ZLMediaKit_x86_init">
+  <PropertyGroup Label="Default initializers for properties">
+    <Linkage-ZLMediaKit_x86 Condition="'$(Linkage-ZLMediaKit_x86)' == ''">dynamic</Linkage-ZLMediaKit_x86>
+    <CallingConvention-ZLMediaKit_x86 Condition="'$(CallingConvention-ZLMediaKit_x86)' == ''">cdecl</CallingConvention-ZLMediaKit_x86>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(MSBuildThisFileDirectory)../..//build/native/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(MSBuildThisFileDirectory)../..//build/native/include/;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Label="Win32 and v140 and dynamic and Release" Condition="'$(Platform.ToLower())' == 'win32' And ( $(PlatformToolset.ToLower().IndexOf('v140')) &gt; -1 Or '$(PlatformToolset.ToLower())' == 'windowskernelmodedriver8.0' Or '$(PlatformToolset.ToLower())' == 'windowsapplicationfordrivers8.0' Or '$(PlatformToolset.ToLower())' == 'windowsusermodedriver8.0' ) And '$(Linkage-ZLMediaKit_x86.ToLower())' == 'dynamic' And ( $(Configuration.ToLower().IndexOf('debug')) == -1 )">
+    <Link>
+      <AdditionalDependencies>$(MSBuildThisFileDirectory)../..//build/native/lib/Win32\v140\dynamic\Release\mk_api.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Label="Win32 and v140 and dynamic and Debug" Condition="'$(Platform.ToLower())' == 'win32' And ( $(PlatformToolset.ToLower().IndexOf('v140')) &gt; -1 Or '$(PlatformToolset.ToLower())' == 'windowskernelmodedriver8.0' Or '$(PlatformToolset.ToLower())' == 'windowsapplicationfordrivers8.0' Or '$(PlatformToolset.ToLower())' == 'windowsusermodedriver8.0' ) And '$(Linkage-ZLMediaKit_x86.ToLower())' == 'dynamic' And ( $(Configuration.ToLower().IndexOf('debug')) &gt; -1 )">
+    <Link>
+      <AdditionalDependencies>$(MSBuildThisFileDirectory)../..//build/native/lib/Win32\v140\dynamic\Debug\mk_api.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Label="Win32 and v142 and dynamic and Release" Condition="'$(Platform.ToLower())' == 'win32' And ( $(PlatformToolset.ToLower().IndexOf('v142')) &gt; -1 Or '$(PlatformToolset.ToLower())' == 'windowskernelmodedriver10.0' Or '$(PlatformToolset.ToLower())' == 'windowsapplicationfordrivers10.0' Or '$(PlatformToolset.ToLower())' == 'windowsusermodedriver10.0' ) And '$(Linkage-ZLMediaKit_x86.ToLower())' == 'dynamic' And ( $(Configuration.ToLower().IndexOf('debug')) == -1 )">
+    <Link>
+      <AdditionalDependencies>$(MSBuildThisFileDirectory)../..//build/native/lib/Win32\v142\dynamic\Release\mk_api.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Label="Win32 and v142 and dynamic and Debug" Condition="'$(Platform.ToLower())' == 'win32' And ( $(PlatformToolset.ToLower().IndexOf('v142')) &gt; -1 Or '$(PlatformToolset.ToLower())' == 'windowskernelmodedriver10.0' Or '$(PlatformToolset.ToLower())' == 'windowsapplicationfordrivers10.0' Or '$(PlatformToolset.ToLower())' == 'windowsusermodedriver10.0' ) And '$(Linkage-ZLMediaKit_x86.ToLower())' == 'dynamic' And ( $(Configuration.ToLower().IndexOf('debug')) &gt; -1 )">
+    <Link>
+      <AdditionalDependencies>$(MSBuildThisFileDirectory)../..//build/native/lib/Win32\v142\dynamic\Debug\mk_api.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <PropertyPageSchema Include="$(MSBuildThisFileDirectory)\default-propertiesui.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PropertyPageSchema Include="$(MSBuildThisFileDirectory)\ZLMediaKit_x86-propertiesui-c0f53438-508a-44dc-a00b-16f400c7e535.xml" />
+  </ItemGroup>
+  <UsingTask TaskName="ZLMediaKit_x86_Contains" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v4.0.dll" TaskFactory="CodeTaskFactory">
+    <ParameterGroup>
+      <Text Output="false" ParameterType="System.String" />
+      <Library Output="false" Required="true" ParameterType="System.String" />
+      <Value Output="false" Required="true" ParameterType="System.String" />
+      <Result Output="true" ParameterType="System.String" />
+    </ParameterGroup>
+    <Task>
+      <Code>Result = ((Text ?? "").Split(';').Contains(Library) ) ? Value : String.Empty;</Code>
+    </Task>
+  </UsingTask>
+  <Target Name="ZLMediaKit_x86_init">
+    <ZLMediaKit_x86_Contains Text="Linkage-dynamic" Library="ZLMediaKit_x86" Value="dynamic" Condition="'$(Linkage-ZLMediaKit_x86)'==''">
+      <Output TaskParameter="Result" PropertyName="Linkage-ZLMediaKit_x86" />
+    </ZLMediaKit_x86_Contains>
+    <ZLMediaKit_x86_Contains Text="Linkage-static" Library="ZLMediaKit_x86" Value="static" Condition="'$(Linkage-ZLMediaKit_x86)'==''">
+      <Output TaskParameter="Result" PropertyName="Linkage-ZLMediaKit_x86" />
+    </ZLMediaKit_x86_Contains>
+    <ZLMediaKit_x86_Contains Text="Linkage-ltcg" Library="ZLMediaKit_x86" Value="ltcg" Condition="'$(Linkage-ZLMediaKit_x86)'==''">
+      <Output TaskParameter="Result" PropertyName="Linkage-ZLMediaKit_x86" />
+    </ZLMediaKit_x86_Contains>
+    <ZLMediaKit_x86_Contains Text="Linkage-sxs" Library="ZLMediaKit_x86" Value="sxs" Condition="'$(Linkage-ZLMediaKit_x86)'==''">
+      <Output TaskParameter="Result" PropertyName="Linkage-ZLMediaKit_x86" />
+    </ZLMediaKit_x86_Contains>
+    <ZLMediaKit_x86_Contains Text="CallingConvention-cdecl" Library="ZLMediaKit_x86" Value="cdecl" Condition="'$(CallingConvention-ZLMediaKit_x86)'==''">
+      <Output TaskParameter="Result" PropertyName="CallingConvention-ZLMediaKit_x86" />
+    </ZLMediaKit_x86_Contains>
+    <ZLMediaKit_x86_Contains Text="CallingConvention-stdcall" Library="ZLMediaKit_x86" Value="stdcall" Condition="'$(CallingConvention-ZLMediaKit_x86)'==''">
+      <Output TaskParameter="Result" PropertyName="CallingConvention-ZLMediaKit_x86" />
+    </ZLMediaKit_x86_Contains>
+    <ZLMediaKit_x86_Contains Text="CallingConvention-fastcall" Library="ZLMediaKit_x86" Value="fastcall" Condition="'$(CallingConvention-ZLMediaKit_x86)'==''">
+      <Output TaskParameter="Result" PropertyName="CallingConvention-ZLMediaKit_x86" />
+    </ZLMediaKit_x86_Contains>
+    <ZLMediaKit_x86_Contains Text="CallingConvention-thiscall" Library="ZLMediaKit_x86" Value="thiscall" Condition="'$(CallingConvention-ZLMediaKit_x86)'==''">
+      <Output TaskParameter="Result" PropertyName="CallingConvention-ZLMediaKit_x86" />
+    </ZLMediaKit_x86_Contains>
+    <ZLMediaKit_x86_Contains Text="CallingConvention-clrcall" Library="ZLMediaKit_x86" Value="clrcall" Condition="'$(CallingConvention-ZLMediaKit_x86)'==''">
+      <Output TaskParameter="Result" PropertyName="CallingConvention-ZLMediaKit_x86" />
+    </ZLMediaKit_x86_Contains>
+  </Target>
+</Project>
