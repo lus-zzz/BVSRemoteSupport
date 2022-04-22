@@ -22,6 +22,7 @@
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QTextEdit>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -45,7 +46,7 @@ public:
     QPushButton *pushButton_2;
     QPushButton *pushButton;
     QPushButton *pushButton_3;
-    QGroupBox *groupBox_3;
+    QTextEdit *textEdit;
     QMenuBar *menubar;
     QStatusBar *statusbar;
 
@@ -53,7 +54,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(502, 319);
+        MainWindow->resize(757, 418);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QStringLiteral("centralwidget"));
         gridLayout_2 = new QGridLayout(centralwidget);
@@ -127,15 +128,17 @@ public:
 
         gridLayout_2->addWidget(groupBox_2, 1, 0, 1, 1);
 
-        groupBox_3 = new QGroupBox(centralwidget);
-        groupBox_3->setObjectName(QStringLiteral("groupBox_3"));
+        textEdit = new QTextEdit(centralwidget);
+        textEdit->setObjectName(QStringLiteral("textEdit"));
+        textEdit->setMinimumSize(QSize(0, 0));
+        textEdit->setMaximumSize(QSize(350, 16777215));
 
-        gridLayout_2->addWidget(groupBox_3, 2, 0, 1, 1);
+        gridLayout_2->addWidget(textEdit, 0, 1, 2, 1);
 
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName(QStringLiteral("menubar"));
-        menubar->setGeometry(QRect(0, 0, 502, 22));
+        menubar->setGeometry(QRect(0, 0, 757, 22));
         MainWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(MainWindow);
         statusbar->setObjectName(QStringLiteral("statusbar"));
@@ -152,7 +155,7 @@ public:
         groupBox->setTitle(QApplication::translate("MainWindow", "NPS", Q_NULLPTR));
         label_port->setText(QApplication::translate("MainWindow", "port", Q_NULLPTR));
         label_ip->setText(QApplication::translate("MainWindow", "ip", Q_NULLPTR));
-        lineEdit_ip->setText(QApplication::translate("MainWindow", "oc1.betvsys.com", Q_NULLPTR));
+        lineEdit_ip->setText(QApplication::translate("MainWindow", "saas.znfx.net", Q_NULLPTR));
         lineEdit_port->setText(QApplication::translate("MainWindow", "8006", Q_NULLPTR));
         label_key->setText(QApplication::translate("MainWindow", "key", Q_NULLPTR));
         lineEdit_key->setText(QApplication::translate("MainWindow", "45cb6383870d9e87a952c53daf22d3dc", Q_NULLPTR));
@@ -161,7 +164,6 @@ public:
         pushButton_2->setText(QApplication::translate("MainWindow", "\346\226\207\344\273\266\346\234\215\345\212\241\345\231\250", Q_NULLPTR));
         pushButton->setText(QApplication::translate("MainWindow", "\350\277\234\347\250\213\346\241\214\351\235\242", Q_NULLPTR));
         pushButton_3->setText(QApplication::translate("MainWindow", " \350\207\252\345\256\232\344\271\211", Q_NULLPTR));
-        groupBox_3->setTitle(QApplication::translate("MainWindow", "\347\212\266\346\200\201", Q_NULLPTR));
     } // retranslateUi
 
 };

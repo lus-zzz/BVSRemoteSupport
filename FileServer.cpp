@@ -1,4 +1,4 @@
-#include "FileServer.h"
+﻿#include "FileServer.h"
 
 #include <QFile>
 #include <QSettings>
@@ -140,10 +140,16 @@ void API_CALL on_mk_http_before_access(const mk_parser parser,
 }
 
 
-FileServer::FileServer(QString port,QObject* parent):QObject(parent)
+FileServer::FileServer(QString filename,QObject* parent):QObject(parent)
 {
     QFile::copy(":/resources/c_api.ini","c_api.ini");
     QFile::setPermissions("c_api.ini",QFileDevice::ReadOther|QFileDevice::WriteOther);
+    QSettings inifile("c_api.ini",QSettings::IniFormat);
+    inifile.beginGroup("http");
+    if(filename.isEmpty())
+        filename = "D:/";
+    inifile.setValue("rootPath",filename);
+    inifile.endGroup();
     char *ini_path = mk_util_get_exe_dir("c_api.ini");
     mk_config config;
     config.ini = ini_path;
@@ -159,7 +165,7 @@ FileServer::FileServer(QString port,QObject* parent):QObject(parent)
     mk_env_init(&config);
     free(ini_path);
 
-    mk_http_server_start(port.toInt(), 0);
+    port = mk_http_server_start(0, 0);
 
     mk_events events;
     events.on_mk_http_request = on_mk_http_request;

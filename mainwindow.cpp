@@ -1,14 +1,18 @@
-#include "mainwindow.h"
+﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QMessageBox>
 #include <QInputDialog>
+#include <QFormLayout>
+#include <QSpinBox>
+#include <QDialogButtonBox>
+#include <QLineEdit>
+#include <QFileDialog>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->statusbar->addWidget(&statusLabel);
     m_pNPSWrap = new NPSWrap(this);
     clientId = "";
     m_pFileServer = nullptr;
@@ -40,8 +44,8 @@ void MainWindow::on_pushButton_clicked()
 void MainWindow::slot_addSuccess(QString text)
 {
 
-    statusLabel.setText(text);
-    QMessageBox::information(this,"提示",text);
+    ui->textEdit->append(text);
+//    QMessageBox::information(this,"提示",text);
 }
 
 
@@ -55,21 +59,47 @@ void MainWindow::closeEvent(QCloseEvent *event)
 void MainWindow::on_pushButton_2_clicked()
 {
     if(!clientId.isEmpty()){
-        m_pFileServer = new FileServer("8080",this);
-        emit m_pNPSWrap->signal_addPorxy(clientId,"8080","FileServer");
+        QString filename = QFileDialog::getExistingDirectory(this,"选择目录","D:\\");
+        if(!filename.isEmpty()){
+            m_pFileServer = new FileServer(filename,this);
+            if(m_pFileServer->port)
+                emit m_pNPSWrap->signal_addPorxy(clientId,QString::number(m_pFileServer->port),"FileServer");
+        }
     }
 }
 
 
 void MainWindow::on_pushButton_3_clicked()
 {
-    bool ok;
-    QString text = QInputDialog::getText(this, tr("自定义映射主机和端口"),
-                                         tr("IP:Port"), QLineEdit::Normal,
-                                         QString("127.0.0.1:80"), &ok);
-    QStringList strList =  text.split(":");
-    if (ok && (strList.size() == 2)){
-        emit m_pNPSWrap->signal_addPorxy(clientId,text,"CustomizeServer");
+    static int count = 0;
+    QDialog dialog(this);
+    QFormLayout form(&dialog);
+    // Value1
+    QString value1 = QString("主机和端口");
+    QLineEdit* lineEdit1 = new QLineEdit(&dialog);
+    lineEdit1->setText("127.0.0.1:8899");
+    form.addRow(value1, lineEdit1);
+    // Value2
+    QString value2 = QString("服务描述");
+    QLineEdit * lineEdit2 = new QLineEdit(&dialog);
+    lineEdit2->setText(QString("自定义服务%1").arg(++count));
+    form.addRow(value2, lineEdit2);
+    // Add Cancel and OK button
+    QDialogButtonBox buttonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel,
+        Qt::Horizontal, &dialog);
+    form.addRow(&buttonBox);
+    QObject::connect(&buttonBox, SIGNAL(accepted()), &dialog, SLOT(accept()));
+    QObject::connect(&buttonBox, SIGNAL(rejected()), &dialog, SLOT(reject()));
+
+    // Process when OK button is clicked
+    if (dialog.exec() == QDialog::Accepted) {
+        QString text = lineEdit1->text();
+        QStringList strList =  text.split(":");
+        if (strList.size() == 2){
+            emit m_pNPSWrap->signal_addPorxy(clientId,text,lineEdit2->text());
+        }
+
     }
+
 }
 

@@ -22,7 +22,6 @@ private:
     Ui::MainWindow *ui;
     NPSWrap* m_pNPSWrap;
     QString clientId;
-    QLabel statusLabel;
     FileServer* m_pFileServer;
 
 signals:

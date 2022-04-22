@@ -36,3 +36,7 @@ DEPENDPATH += $$PWD/package/ZLMediaKit_x86.1.0.0.2/build/native/include
 RESOURCES += \
     resourecs.qrc
 
+msvc {
+    QMAKE_CFLAGS += /utf-8
+    QMAKE_CXXFLAGS += /utf-8
+}

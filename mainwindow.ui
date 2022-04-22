@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>502</width>
-    <height>319</height>
+    <width>757</width>
+    <height>418</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -38,7 +38,7 @@
        <item row="0" column="1">
         <widget class="QLineEdit" name="lineEdit_ip">
          <property name="text">
-          <string>oc1.betvsys.com</string>
+          <string>saas.znfx.net</string>
          </property>
         </widget>
        </item>
@@ -109,10 +109,19 @@
       </layout>
      </widget>
     </item>
-    <item row="2" column="0">
-     <widget class="QGroupBox" name="groupBox_3">
-      <property name="title">
-       <string>状态</string>
+    <item row="0" column="1" rowspan="2">
+     <widget class="QTextEdit" name="textEdit">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>350</width>
+        <height>16777215</height>
+       </size>
       </property>
      </widget>
     </item>
@@ -123,7 +132,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>502</width>
+     <width>757</width>
      <height>22</height>
     </rect>
    </property>

@@ -150,7 +150,7 @@ void NPSWrap::slot_addPorxy(QString clientId,QString localPort,QString remark)
             int status = obj.value("status").toInt();
             QPair<QString,QString> info = proxyInfo.value(reply_);
             if(status){
-                emit signal_addSuccess(QString("%1:%2:%3").arg(info.second).arg(reqip_).arg(serverPort-1));
+                emit signal_addSuccess(QString("%1:%2:%3 --> %4").arg(info.second).arg(reqip_).arg(serverPort-1).arg(info.first));
             }else{
                 emit signal_addPorxy(clientId_,info.first,info.second);
             }
