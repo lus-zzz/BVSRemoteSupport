@@ -35,6 +35,8 @@ private slots:
     // QWidget interface
     void on_pushButton_2_clicked();
 
+    void on_pushButton_3_clicked();
+
 protected:
     void closeEvent(QCloseEvent *event);
 };

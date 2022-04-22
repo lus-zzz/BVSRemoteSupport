@@ -1,8 +1,10 @@
 #include "FileServer.h"
 
+#include <QFile>
 #include <QSettings>
 #include <signal.h>
 #include <string.h>
+#include <QDebug>
 #include "mk_mediakit.h"
 
 #ifdef _WIN32
@@ -140,9 +142,9 @@ void API_CALL on_mk_http_before_access(const mk_parser parser,
 
 FileServer::FileServer(QString port,QObject* parent):QObject(parent)
 {
-
+    QFile::copy(":/resources/c_api.ini","c_api.ini");
+    QFile::setPermissions("c_api.ini",QFileDevice::ReadOther|QFileDevice::WriteOther);
     char *ini_path = mk_util_get_exe_dir("c_api.ini");
-
     mk_config config;
     config.ini = ini_path;
     config.ini_is_path = 1;
@@ -167,7 +169,6 @@ FileServer::FileServer(QString port,QObject* parent):QObject(parent)
     mk_events_listen(&events);
 
     log_info("media server %s", "stared!");
-
 }
 
 FileServer::~FileServer()

@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QMessageBox>
+#include <QInputDialog>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -38,6 +39,7 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::slot_addSuccess(QString text)
 {
+
     statusLabel.setText(text);
     QMessageBox::information(this,"提示",text);
 }
@@ -55,6 +57,19 @@ void MainWindow::on_pushButton_2_clicked()
     if(!clientId.isEmpty()){
         m_pFileServer = new FileServer("8080",this);
         emit m_pNPSWrap->signal_addPorxy(clientId,"8080","FileServer");
+    }
+}
+
+
+void MainWindow::on_pushButton_3_clicked()
+{
+    bool ok;
+    QString text = QInputDialog::getText(this, tr("自定义映射主机和端口"),
+                                         tr("IP:Port"), QLineEdit::Normal,
+                                         QString("127.0.0.1:80"), &ok);
+    QStringList strList =  text.split(":");
+    if (ok && (strList.size() == 2)){
+        emit m_pNPSWrap->signal_addPorxy(clientId,text,"CustomizeServer");
     }
 }
 

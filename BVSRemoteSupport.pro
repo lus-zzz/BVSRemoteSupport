@@ -32,3 +32,7 @@ else:win32:CONFIG(debug, debug|release): LIBS += -L$$PWD/package/ZLMediaKit_x86.
 
 INCLUDEPATH += $$PWD/package/ZLMediaKit_x86.1.0.0.2/build/native/include
 DEPENDPATH += $$PWD/package/ZLMediaKit_x86.1.0.0.2/build/native/include
+
+RESOURCES += \
+    resourecs.qrc
+

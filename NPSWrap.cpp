@@ -130,7 +130,7 @@ void NPSWrap::slot_addPorxy(QString clientId,QString localPort,QString remark)
     QUrlQuery body;
     body.addQueryItem("auth_key",auth_key);
     body.addQueryItem("timestamp",timestamp);
-    body.addQueryItem("remark","RemoteDesktop");
+    body.addQueryItem("remark",remark);
     body.addQueryItem("type","tcp");
     body.addQueryItem("port",QString::number(serverPort++));
     body.addQueryItem("target",localPort);
