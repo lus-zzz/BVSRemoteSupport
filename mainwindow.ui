@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>757</width>
-    <height>418</height>
+    <height>429</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -21,31 +21,10 @@
        <string>NPS</string>
       </property>
       <layout class="QGridLayout" name="gridLayout">
-       <item row="1" column="0">
-        <widget class="QLabel" name="label_port">
+       <item row="2" column="1">
+        <widget class="QLineEdit" name="lineEdit_key">
          <property name="text">
-          <string>port</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="0">
-        <widget class="QLabel" name="label_ip">
-         <property name="text">
-          <string>ip</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="1">
-        <widget class="QLineEdit" name="lineEdit_ip">
-         <property name="text">
-          <string>saas.znfx.net</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="1">
-        <widget class="QLineEdit" name="lineEdit_port">
-         <property name="text">
-          <string>8006</string>
+          <string>45cb6383870d9e87a952c53daf22d3dc</string>
          </property>
         </widget>
        </item>
@@ -56,14 +35,49 @@
          </property>
         </widget>
        </item>
-       <item row="2" column="1">
-        <widget class="QLineEdit" name="lineEdit_key">
+       <item row="1" column="1">
+        <widget class="QLineEdit" name="lineEdit_port">
          <property name="text">
-          <string>45cb6383870d9e87a952c53daf22d3dc</string>
+          <string>8006</string>
          </property>
         </widget>
        </item>
-       <item row="0" column="3" rowspan="3">
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_port">
+         <property name="text">
+          <string>port</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="lineEdit_ip">
+         <property name="text">
+          <string>saas.znfx.net</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label_ip">
+         <property name="text">
+          <string>ip</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="0">
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>注册身份</string>
+         </property>
+        </widget>
+       </item>
+       <item row="3" column="1">
+        <widget class="QLineEdit" name="lineEdit">
+         <property name="text">
+          <string>BVSRemoteSupport</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="3" rowspan="4">
         <widget class="QPushButton" name="pushButton_addClient">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">

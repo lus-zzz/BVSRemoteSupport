@@ -50,8 +50,8 @@ QString NPSWrap::getTime()
         }
     }
 
-//    QDateTime dataTime = QDateTime::currentDateTime();   //获取当前时间
-//    time =  QString::number(dataTime.toTime_t());
+    //    QDateTime dataTime = QDateTime::currentDateTime();   //获取当前时间
+    //    time =  QString::number(dataTime.toTime_t());
 
 
     return time;
@@ -64,7 +64,7 @@ QString NPSWrap::calcSign(QString timestamp, QString key)
     return md5Str;
 }
 
-void NPSWrap::slot_addClient(QString reqip, QString reqport,QString key)
+void NPSWrap::slot_addClient(QString reqip, QString reqport,QString key,QString remark)
 {
     reqip_ = reqip;
     reqport_ = reqport;
@@ -80,7 +80,7 @@ void NPSWrap::slot_addClient(QString reqip, QString reqport,QString key)
     QUrlQuery body;
     body.addQueryItem("auth_key",auth_key);
     body.addQueryItem("timestamp",timestamp);
-    body.addQueryItem("remark","BVSRemoteSupport");
+    body.addQueryItem("remark",remark);
     body.addQueryItem("u","");
     body.addQueryItem("p","");
     body.addQueryItem("limit","20");
@@ -95,9 +95,9 @@ void NPSWrap::slot_addClient(QString reqip, QString reqport,QString key)
     qDebug() <<  __FILE__ << __LINE__ << body.toString();
     QNetworkReply* reply =  m_pMessage->post(req,body.toString().toUtf8());
     connect(reply, static_cast<void(QNetworkReply::*)(QNetworkReply::NetworkError)>(&QNetworkReply::error),
-          [=](QNetworkReply::NetworkError code){
-            qDebug() <<  __FILE__ << __LINE__ << code;
-       });
+            [=](QNetworkReply::NetworkError code){
+        qDebug() <<  __FILE__ << __LINE__ << code;
+    });
     connect(reply,&QNetworkReply::finished,this,[&](){
         QNetworkReply* reply_ =  (QNetworkReply*)sender();
         QByteArray response = reply_->readAll();
@@ -116,7 +116,7 @@ void NPSWrap::slot_addClient(QString reqip, QString reqport,QString key)
     });
 }
 
-void NPSWrap::slot_addPorxy(QString clientId,QString localPort,QString remark)
+void NPSWrap::slot_addPorxy(QString clientId,QString localPort,QString remark,bool isTcp)
 {
     clientId_ = clientId;
     QUrl url;
@@ -131,7 +131,11 @@ void NPSWrap::slot_addPorxy(QString clientId,QString localPort,QString remark)
     body.addQueryItem("auth_key",auth_key);
     body.addQueryItem("timestamp",timestamp);
     body.addQueryItem("remark",remark);
-    body.addQueryItem("type","tcp");
+    if(isTcp){
+        body.addQueryItem("type","tcp");
+    }else{
+        body.addQueryItem("type","udp");
+    }
     body.addQueryItem("port",QString::number(serverPort++));
     body.addQueryItem("target",localPort);
     body.addQueryItem("client_id",clientId);
@@ -178,9 +182,9 @@ void NPSWrap::slot_getCliendIdByVkey(QString reqip, QString reqport,QString key)
     body.addQueryItem("start","0");
     QNetworkReply* reply =  m_pMessage->post(req,body.toString().toUtf8());
     connect(reply, static_cast<void(QNetworkReply::*)(QNetworkReply::NetworkError)>(&QNetworkReply::error),
-          [=](QNetworkReply::NetworkError code){
-            qDebug() <<  __FILE__ << __LINE__ << code;
-       });
+            [=](QNetworkReply::NetworkError code){
+        qDebug() <<  __FILE__ << __LINE__ << code;
+    });
     connect(reply,&QNetworkReply::finished,this,[&](){
         QNetworkReply* reply_ =  (QNetworkReply*)sender();
         QByteArray response = reply_->readAll();

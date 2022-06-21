@@ -7,6 +7,7 @@
 #include <QDialogButtonBox>
 #include <QLineEdit>
 #include <QFileDialog>
+#include <QRadioButton>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -30,7 +31,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_addClient_clicked()
 {
-    m_pNPSWrap->slot_addClient(ui->lineEdit_ip->text(),ui->lineEdit_port->text(),ui->lineEdit_key->text());
+    m_pNPSWrap->slot_addClient(ui->lineEdit_ip->text(),ui->lineEdit_port->text(),ui->lineEdit_key->text(),ui->lineEdit->text());
 }
 
 
@@ -84,6 +85,17 @@ void MainWindow::on_pushButton_3_clicked()
     QLineEdit * lineEdit2 = new QLineEdit(&dialog);
     lineEdit2->setText(QString("自定义服务%1").arg(++count));
     form.addRow(value2, lineEdit2);
+
+    QRadioButton* rb1 = new QRadioButton("tcp", this);
+    rb1->setChecked(true);
+    QRadioButton* rb2 = new QRadioButton("udp", this);
+
+    QHBoxLayout* hb = new QHBoxLayout();
+    hb->addWidget(rb1);
+    hb->addWidget(rb2);
+
+    form.addRow("type",hb);
+
     // Add Cancel and OK button
     QDialogButtonBox buttonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel,
         Qt::Horizontal, &dialog);
@@ -96,7 +108,7 @@ void MainWindow::on_pushButton_3_clicked()
         QString text = lineEdit1->text();
         QStringList strList =  text.split(":");
         if (strList.size() == 2){
-            emit m_pNPSWrap->signal_addPorxy(clientId,text,lineEdit2->text());
+            emit m_pNPSWrap->signal_addPorxy(clientId,text,lineEdit2->text(),rb1->isChecked());
         }
 
     }

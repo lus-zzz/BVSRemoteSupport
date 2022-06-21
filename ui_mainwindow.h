@@ -34,12 +34,14 @@ public:
     QGridLayout *gridLayout_2;
     QGroupBox *groupBox;
     QGridLayout *gridLayout;
-    QLabel *label_port;
-    QLabel *label_ip;
-    QLineEdit *lineEdit_ip;
-    QLineEdit *lineEdit_port;
-    QLabel *label_key;
     QLineEdit *lineEdit_key;
+    QLabel *label_key;
+    QLineEdit *lineEdit_port;
+    QLabel *label_port;
+    QLineEdit *lineEdit_ip;
+    QLabel *label_ip;
+    QLabel *label;
+    QLineEdit *lineEdit;
     QPushButton *pushButton_addClient;
     QGroupBox *groupBox_2;
     QGridLayout *gridLayout_3;
@@ -54,7 +56,7 @@ public:
     {
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
-        MainWindow->resize(757, 418);
+        MainWindow->resize(757, 429);
         centralwidget = new QWidget(MainWindow);
         centralwidget->setObjectName(QStringLiteral("centralwidget"));
         gridLayout_2 = new QGridLayout(centralwidget);
@@ -63,35 +65,45 @@ public:
         groupBox->setObjectName(QStringLiteral("groupBox"));
         gridLayout = new QGridLayout(groupBox);
         gridLayout->setObjectName(QStringLiteral("gridLayout"));
-        label_port = new QLabel(groupBox);
-        label_port->setObjectName(QStringLiteral("label_port"));
+        lineEdit_key = new QLineEdit(groupBox);
+        lineEdit_key->setObjectName(QStringLiteral("lineEdit_key"));
 
-        gridLayout->addWidget(label_port, 1, 0, 1, 1);
-
-        label_ip = new QLabel(groupBox);
-        label_ip->setObjectName(QStringLiteral("label_ip"));
-
-        gridLayout->addWidget(label_ip, 0, 0, 1, 1);
-
-        lineEdit_ip = new QLineEdit(groupBox);
-        lineEdit_ip->setObjectName(QStringLiteral("lineEdit_ip"));
-
-        gridLayout->addWidget(lineEdit_ip, 0, 1, 1, 1);
-
-        lineEdit_port = new QLineEdit(groupBox);
-        lineEdit_port->setObjectName(QStringLiteral("lineEdit_port"));
-
-        gridLayout->addWidget(lineEdit_port, 1, 1, 1, 1);
+        gridLayout->addWidget(lineEdit_key, 2, 1, 1, 1);
 
         label_key = new QLabel(groupBox);
         label_key->setObjectName(QStringLiteral("label_key"));
 
         gridLayout->addWidget(label_key, 2, 0, 1, 1);
 
-        lineEdit_key = new QLineEdit(groupBox);
-        lineEdit_key->setObjectName(QStringLiteral("lineEdit_key"));
+        lineEdit_port = new QLineEdit(groupBox);
+        lineEdit_port->setObjectName(QStringLiteral("lineEdit_port"));
 
-        gridLayout->addWidget(lineEdit_key, 2, 1, 1, 1);
+        gridLayout->addWidget(lineEdit_port, 1, 1, 1, 1);
+
+        label_port = new QLabel(groupBox);
+        label_port->setObjectName(QStringLiteral("label_port"));
+
+        gridLayout->addWidget(label_port, 1, 0, 1, 1);
+
+        lineEdit_ip = new QLineEdit(groupBox);
+        lineEdit_ip->setObjectName(QStringLiteral("lineEdit_ip"));
+
+        gridLayout->addWidget(lineEdit_ip, 0, 1, 1, 1);
+
+        label_ip = new QLabel(groupBox);
+        label_ip->setObjectName(QStringLiteral("label_ip"));
+
+        gridLayout->addWidget(label_ip, 0, 0, 1, 1);
+
+        label = new QLabel(groupBox);
+        label->setObjectName(QStringLiteral("label"));
+
+        gridLayout->addWidget(label, 3, 0, 1, 1);
+
+        lineEdit = new QLineEdit(groupBox);
+        lineEdit->setObjectName(QStringLiteral("lineEdit"));
+
+        gridLayout->addWidget(lineEdit, 3, 1, 1, 1);
 
         pushButton_addClient = new QPushButton(groupBox);
         pushButton_addClient->setObjectName(QStringLiteral("pushButton_addClient"));
@@ -101,7 +113,7 @@ public:
         sizePolicy.setHeightForWidth(pushButton_addClient->sizePolicy().hasHeightForWidth());
         pushButton_addClient->setSizePolicy(sizePolicy);
 
-        gridLayout->addWidget(pushButton_addClient, 0, 3, 3, 1);
+        gridLayout->addWidget(pushButton_addClient, 0, 3, 4, 1);
 
 
         gridLayout_2->addWidget(groupBox, 0, 0, 1, 1);
@@ -153,12 +165,14 @@ public:
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", Q_NULLPTR));
         groupBox->setTitle(QApplication::translate("MainWindow", "NPS", Q_NULLPTR));
-        label_port->setText(QApplication::translate("MainWindow", "port", Q_NULLPTR));
-        label_ip->setText(QApplication::translate("MainWindow", "ip", Q_NULLPTR));
-        lineEdit_ip->setText(QApplication::translate("MainWindow", "saas.znfx.net", Q_NULLPTR));
-        lineEdit_port->setText(QApplication::translate("MainWindow", "8006", Q_NULLPTR));
-        label_key->setText(QApplication::translate("MainWindow", "key", Q_NULLPTR));
         lineEdit_key->setText(QApplication::translate("MainWindow", "45cb6383870d9e87a952c53daf22d3dc", Q_NULLPTR));
+        label_key->setText(QApplication::translate("MainWindow", "key", Q_NULLPTR));
+        lineEdit_port->setText(QApplication::translate("MainWindow", "8006", Q_NULLPTR));
+        label_port->setText(QApplication::translate("MainWindow", "port", Q_NULLPTR));
+        lineEdit_ip->setText(QApplication::translate("MainWindow", "saas.znfx.net", Q_NULLPTR));
+        label_ip->setText(QApplication::translate("MainWindow", "ip", Q_NULLPTR));
+        label->setText(QApplication::translate("MainWindow", "\346\263\250\345\206\214\350\272\253\344\273\275", Q_NULLPTR));
+        lineEdit->setText(QApplication::translate("MainWindow", "BVSRemoteSupport", Q_NULLPTR));
         pushButton_addClient->setText(QApplication::translate("MainWindow", "\346\263\250\345\206\214", Q_NULLPTR));
         groupBox_2->setTitle(QApplication::translate("MainWindow", "\345\212\237\350\203\275", Q_NULLPTR));
         pushButton_2->setText(QApplication::translate("MainWindow", "\346\226\207\344\273\266\346\234\215\345\212\241\345\231\250", Q_NULLPTR));
